@@ -1,26 +1,19 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme } from "@nextui-org/react";
 // 1. Import `createTheme`
 import { useDispatch, useSelector } from "react-redux";
-import { Theme } from "@nextui-org/react";
 import AuthWrapper from "./Utils/AuthWrapper";
 import HomePage from "./Routes/HomePage";
 import TestPageProtected from "./Routes/TestPage";
 import NotFoundPage from "./Routes/NotFoundPage";
 import Layout from "./Utils/Layout";
 import LandingPage from "./Routes/LandingPage";
- 
-
-import { Navbar, Button, Link, Text, Card, Radio } from "@nextui-org/react";
-
-
+import TopBar from "./Components/TopBar";
+import { Button, Link, Text } from "@nextui-org/react";
 function App() {
   const value = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
-
-  const [variant, setVariant] = React.useState("sticky");
-  const variants = ["sticky"];
 
   // themes
   const theme = useMemo(() =>
@@ -342,37 +335,7 @@ function App() {
 
   return (
     <Layout>
-
-
-      <Layout>
-        <Navbar isBordered variant={variant}>
-          <Navbar.Brand>
-            <Text b color="inherit" hideIn="xs">
-              ACME
-            </Text>
-          </Navbar.Brand>
-          <Navbar.Content hideIn="xs">
-            <Navbar.Link href="#">Features</Navbar.Link>
-            <Navbar.Link isActive href="#">
-              Customers
-            </Navbar.Link>
-            <Navbar.Link href="#">Pricing</Navbar.Link>
-            <Navbar.Link href="#">Company</Navbar.Link>
-          </Navbar.Content>
-          <Navbar.Content>
-            <Navbar.Link color="inherit" href="#">
-              Login
-            </Navbar.Link>
-            <Navbar.Item>
-              <Button auto flat as={Link} href="#">
-                Sign Up
-              </Button>
-            </Navbar.Item>
-          </Navbar.Content>
-        </Navbar>
-        
-      </Layout>
-
+      <TopBar />
       <Router>
         <Routes>
           <Route path="/landingpage" element={<LandingPage />} />

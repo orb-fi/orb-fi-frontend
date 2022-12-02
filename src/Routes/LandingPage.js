@@ -1,13 +1,22 @@
-import { Container } from "@nextui-org/react";
+import { Box, Container } from "@mui/material";
+import { Spacer } from "@nextui-org/react";
 import React from "react";
-import Layout from "../Utils/Layout";
 import Text from "@nextui-org/react/Text";
 
 const LandingPage = () => {
   return (
-    <div>
-      <Container display="flex" justify="center" alignItems="center">
-       
+    <Container
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignitems: "center",
+      }}
+    >
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignitems: "center" }}
+      >
         <svg
           width="250"
           height="250"
@@ -47,11 +56,13 @@ const LandingPage = () => {
             </filter>
           </defs>
         </svg>
-      </Container>
-      <Container display="flex" justify="center" alignItems="center" > 
+      </Box>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignitems: "center" }}
+      >
         <Text h1>ORB.FI</Text>
-      </Container>
-    </div>
+      </Box>
+    </Container>
   );
 };
 
