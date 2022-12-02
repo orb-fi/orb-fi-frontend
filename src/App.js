@@ -10,15 +10,23 @@ import TestPageProtected from "./Routes/TestPage";
 import NotFoundPage from "./Routes/NotFoundPage";
 import Layout from "./Utils/Layout";
 import LandingPage from "./Routes/LandingPage";
+ 
+
+import { Navbar, Button, Link, Text, Card, Radio } from "@nextui-org/react";
+
+
 function App() {
   const value = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
+  const [variant, setVariant] = React.useState("sticky");
+  const variants = ["sticky"];
+
   // themes
   const theme = useMemo(() =>
     createTheme({
-      type:"dark",
-     
+      type: "dark",
+
       //  mode:mode,
 
       typography: {
@@ -333,10 +341,41 @@ function App() {
   );
 
   return (
-    <Layout >
+    <Layout>
+
+
+      <Layout>
+        <Navbar isBordered variant={variant}>
+          <Navbar.Brand>
+            <Text b color="inherit" hideIn="xs">
+              ACME
+            </Text>
+          </Navbar.Brand>
+          <Navbar.Content hideIn="xs">
+            <Navbar.Link href="#">Features</Navbar.Link>
+            <Navbar.Link isActive href="#">
+              Customers
+            </Navbar.Link>
+            <Navbar.Link href="#">Pricing</Navbar.Link>
+            <Navbar.Link href="#">Company</Navbar.Link>
+          </Navbar.Content>
+          <Navbar.Content>
+            <Navbar.Link color="inherit" href="#">
+              Login
+            </Navbar.Link>
+            <Navbar.Item>
+              <Button auto flat as={Link} href="#">
+                Sign Up
+              </Button>
+            </Navbar.Item>
+          </Navbar.Content>
+        </Navbar>
+        
+      </Layout>
+
       <Router>
         <Routes>
-         <Route  path="/landingpage" element={<LandingPage  />} />
+          <Route path="/landingpage" element={<LandingPage />} />
           <Route path="/" element={<HomePage />} />
           <Route element={<AuthWrapper />}>
             <Route path="/test" element={<TestPageProtected />} />
