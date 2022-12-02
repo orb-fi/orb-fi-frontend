@@ -59,7 +59,7 @@ const LandingPage = () => {
       <Box
         sx={{ display: "flex", justifyContent: "center", alignitems: "center",mt:'15px' }}
       >
-        <Typography variant="txsSmbd">ORB.FI</Typography>
+        <Typography variant="dxsSmbd">ORB.FI</Typography>
       </Box>
     </Container>
   );
