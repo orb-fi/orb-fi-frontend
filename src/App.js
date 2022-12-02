@@ -336,9 +336,8 @@ function App() {
     <Layout >
       <Router>
         <Routes>
-         <Route  path="LandingPage" element={<LandingPage  />} />
+         <Route  path="/landingpage" element={<LandingPage  />} />
           <Route path="/" element={<HomePage />} />
-          
           <Route element={<AuthWrapper />}>
             <Route path="/test" element={<TestPageProtected />} />
           </Route>
