@@ -9,6 +9,7 @@ import HomePage from "./Routes/HomePage";
 import TestPageProtected from "./Routes/TestPage";
 import NotFoundPage from "./Routes/NotFoundPage";
 import Layout from "./Utils/Layout";
+import LandingPage from "./Routes/LandingPage";
 function App() {
   const value = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
   const theme = useMemo(() =>
     createTheme({
       type:"dark",
+     
       //  mode:mode,
 
       typography: {
@@ -331,10 +333,12 @@ function App() {
   );
 
   return (
-    <Layout>
+    <Layout >
       <Router>
         <Routes>
+         <Route  path="LandingPage" element={<LandingPage  />} />
           <Route path="/" element={<HomePage />} />
+          
           <Route element={<AuthWrapper />}>
             <Route path="/test" element={<TestPageProtected />} />
           </Route>
