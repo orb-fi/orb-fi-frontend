@@ -14,10 +14,10 @@ import { Button, Link, Text } from "@nextui-org/react";
 function App() {
   const value = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
-
+  
   // themes
   const theme = useMemo(() =>
-    createTheme({
+ createTheme({
       type: "dark",
 
       //  mode:mode,
