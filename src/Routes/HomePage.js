@@ -406,60 +406,62 @@ const HomePage = () => {
       >
         <Card css={{ mw: "500px" }}>
           <Card.Body>
-            <Box>
-              <Typography>Recent Transaction</Typography>
-            </Box>
-            <Box
-              sx={{
-                mt: "15px",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <Container>
               <Box>
-                <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+                <Typography>Recent Transaction</Typography>
+              </Box>
+              <Box
+                sx={{
+                  mt: "15px",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Box>
+                  <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "80%",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      ml: "15px",
+                    }}
+                  >
+                    <Typography>abc.orb</Typography>
+                    <Typography>2/4/22</Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography>100 USDT</Typography>
+                    <Typography>MATIC</Typography>
+                  </Box>
+                </Box>
               </Box>
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
-                  width: "80%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  mt: "15px",
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    ml: "15px",
-                  }}
-                >
-                  <Typography>abc.orb</Typography>
-                  <Typography>2/4/22</Typography>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography>100 USDT</Typography>
-                  <Typography>MATIC</Typography>
-                </Box>
+                <ButtonBase>View More</ButtonBase>
               </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                mt: "15px",
-              }}
-            >
-              <ButtonBase>View More</ButtonBase>
-            </Box>
+            </Container>
           </Card.Body>
         </Card>
       </Box>

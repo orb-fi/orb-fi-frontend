@@ -28,6 +28,9 @@ function App() {
             <Route path="/test" element={<TestPageProtected />} />
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/orbwallet" element={<OrbWalletPage />} />
+            <Route path="/iniwallet" element={<OrbWalletPage />} />
+            <Route path="/iniorbwallet" element={<OrbWalletPage />} />
+            
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
