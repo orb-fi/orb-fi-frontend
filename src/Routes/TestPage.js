@@ -1,8 +1,9 @@
 import React from 'react'
-
+import UseOrbWallet from "../Components/UseOrbWallet"
 const TestPage = () => {
-  return (
-    <div>TestPage</div>
+  return (<>
+  <UseOrbWallet/>
+  </>
   )
 }
 

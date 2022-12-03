@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const ConnectWallet = () => {
+  const newUser = true;
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
@@ -40,8 +41,11 @@ const ConnectWallet = () => {
   const authState = useSelector((state) => state.auth);
   useEffect(() => {
     if (authState.currentWallet === "metamask") {
+      if (newUser === true) {
+        navigate("/claimyourorb");
+      }
       navigate("/homepage");
-    } else return null;
+    }
   }, [authState]);
 
   return (

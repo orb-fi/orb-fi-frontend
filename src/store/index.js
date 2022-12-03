@@ -2,28 +2,24 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import authSlice from "./authSlice";
+import authReducer from "./authSlice";
 import counterReducer from "./counterSlice";
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["auth"],
-};
 
 const rootReducer = combineReducers({
-  auth: authSlice,
+  auth: authReducer,
   counter: counterReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(
+  {
+    key: "orbfi",
+    storage: storage,
+  },
+  rootReducer
+);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({
-      serializableCheck: false,
-    });
-  },
   devTools: true,
 });
 
