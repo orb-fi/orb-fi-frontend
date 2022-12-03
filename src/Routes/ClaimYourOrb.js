@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Box, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Input, Grid } from "@nextui-org/react";
 import Button from "@mui/material/Button";
 const ClaimYourOrb = () => {
+  const [orbId, setOrbId] = useState("");
+  const [isAvailable, setIsAvailable] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
-
   return (
     <Container
       sx={{
@@ -93,18 +94,32 @@ const ClaimYourOrb = () => {
         >
           <Grid>
             {isMobile ? (
-              <Input size="xl" labelRight=".orb" placeholder="crons" />
+              <Input
+                size="xl"
+                labelRight=".orb"
+                onChange={(e) => {
+                  setOrbId(`${e.target.value}.orb`);
+                }}
+                placeholder="crons"
+              />
             ) : (
               <Input
                 width="300px"
                 height="50px"
                 labelRight=".orb"
                 placeholder="crons"
+                onChange={(e) => {
+                  setOrbId(`${e.target.value}.orb`);
+                }}
               />
             )}
           </Grid>
         </Box>
-        <Typography sx={{ mt: "10px" }}>Available loader</Typography>
+        <Typography
+          sx={{ mt: "10px", color: isAvailable ? "#41EC8B" : "#F4256D" }}
+        >
+          {isAvailable ? "Available loader" : "OrbID Not Available"}
+        </Typography>
       </Box>
 
       {/* button */}
@@ -118,13 +133,14 @@ const ClaimYourOrb = () => {
         }}
       >
         <Button
-          variant="contained"
+          variant={orbId === "" ? "outlined" : "contained"}
           sx={{
             borderRadius: "20px",
             width: "280px",
             height: "50px",
             backgroundColor: "#0072F5",
           }}
+          disabled={orbId === "" || !isAvailable ? true : false}
         >
           Continue
         </Button>

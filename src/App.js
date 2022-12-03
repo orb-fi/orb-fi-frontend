@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // 1. Import `createTheme`
-import { useDispatch, useSelector } from "react-redux";
 import AuthWrapper from "./Utils/AuthWrapper";
 import HomePage from "./Routes/HomePage";
 import TestPageProtected from "./Routes/TestPage";
@@ -32,7 +31,6 @@ function App() {
             <Route path="/orbwallet" element={<OrbWalletPage />} />
             <Route path="/iniwallet" element={<InitiateWalletTransfer />} />
             <Route path="/iniorbwallet" element={<InitiateOrbWalletTransfer />} />
-            
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
