@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme as useNextTheme } from "next-themes";
-import { Navbar, Link, Text, Dropdown, Divider } from "@nextui-org/react";
+import {
+  Navbar,
+  Link,
+  Text,
+  Dropdown,
+  Divider,
+  Progress,
+  Badge,
+} from "@nextui-org/react";
 import Layout from "../Utils/Layout.js";
-import { deepOrange, deepPurple } from "@mui/material/colors";
+import { deepOrange, deepPurple, green } from "@mui/material/colors";
 import { Switch, useTheme } from "@nextui-org/react";
 import {
   Container,
@@ -22,23 +30,18 @@ import Card from "@nextui-org/react/card";
 import Avatar from "@mui/material/Avatar";
 import { disconnectWalet } from "../store/authSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [amountUsed, setAmountUsed] = useState(400);
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const isMobile = useMediaQuery("(max-width:600px)");
-  const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "My Settings",
-    "DisconnectWalet",
-  ];
   const [toolTipTitle, setToolTipTitle] = React.useState("Copy");
   const authState = useSelector((state) => state.auth);
-  const handleDisconnectWalet = () => {
-    console.log("Disconnect");
-  };
   return (
     <Container
       sx={{
@@ -204,44 +207,62 @@ const HomePage = () => {
       >
         <Card css={{ mw: "500px" }}>
           <Card.Body>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Box>
-                <Typography variant="dsmSmbd">Total Balance</Typography>
+            <Container>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Box>
+                  <Typography variant="dsmMed">Total Balance</Typography>
+                </Box>
+                <Box>
+                  <Tooltip title="Purchse premium to extend limit">
+                    <AddShoppingCartIcon />
+                  </Tooltip>
+                </Box>
               </Box>
               <Box>
-                <Typography>Roller Button</Typography>
+                <Typography variant="dmdSmbd">1100 USD</Typography>
               </Box>
-            </Box>
-            <Box>
-              <Typography variant="dsmReg">1100 USDT</Typography>
-            </Box>
-            <Box sx={{ mt: "10px" }}>
-              <Divider />
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                mt: "15px",
-                alignItems: "center",
-              }}
-            >
               <Box>
-                <Typography variant="dxsMed" inlineSize="10px">
-                  0xjheqwkjhj2897ds987asd8
+                <Typography
+                  variant="txsreg"
+                  sx={{
+                    width: "100%",
+                    mt: "10px",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  max limit available
                 </Typography>
               </Box>
-              <Box>
-                <Typography>modal</Typography>
+              <Progress
+                color="primary"
+                size="sm"
+                value={`${100 - (500 - amountUsed) / 5}`}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  mt: "15px",
+                  alignItems: "center",
+                }}
+              >
+                <Box sx={{ width: "50px" }}>
+                  <Typography variant="txlMed" inlineSize="10px" noWrap={true}>
+                    0xjheqwkjhj2897ds987asd8
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography>modal</Typography>
+                </Box>
               </Box>
-            </Box>
+            </Container>
           </Card.Body>
         </Card>
       </Box>
@@ -265,7 +286,7 @@ const HomePage = () => {
               }}
             >
               <Typography variant="dxsMed">OrbID:</Typography>
-              <Typography>0xsadjhsdjkh289u928uh</Typography>
+              <Typography variant="tmdMed">0xsadjhsdjkh289u928uh</Typography>
               <IconButton
                 onClick={() => {
                   navigator.clipboard
@@ -279,7 +300,7 @@ const HomePage = () => {
                 }}
               >
                 <Tooltip title={toolTipTitle} placement="top" arrow>
-                  <Typography color="white">Copy</Typography>
+                  <Badge>Copy</Badge>
                 </Tooltip>
               </IconButton>
 
@@ -304,24 +325,73 @@ const HomePage = () => {
             minWidth: "50%",
           }}
         >
-          <Button
-            variant="contained"
-            sx={{ width: "60px", height: "60px", borderRadius: "30px" }}
+          {/* button 1 */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            1
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ width: "60px", height: "60px", borderRadius: "30px" }}
+            <Button
+              variant="contained"
+              sx={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "30px",
+                bgcolor: "#0072F5",
+              }}
+              onClick={() => navigate("/orbwallet")}
+            >
+              1
+            </Button>
+            <Typography variant="tlgMed">Orb Transfer</Typography>
+          </Box>
+          {/* button 2 */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            2
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ width: "60px", height: "60px", borderRadius: "30px" }}
+            <Button
+              variant="contained"
+              sx={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "30px",
+                bgcolor: "#0072F5",
+              }}
+            >
+              2
+            </Button>
+            <Typography variant="tlgMed">Wallet-Wallet</Typography>
+          </Box>
+          {/* button 3 */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            3
-          </Button>
+            <Button
+              variant="contained"
+              sx={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "30px",
+                bgcolor: "#0072F5",
+              }}
+            >
+              3
+            </Button>
+            <Typography variant="tlgMed">Split</Typography>
+          </Box>
         </Box>
       </Box>
 
@@ -344,26 +414,52 @@ const HomePage = () => {
                 mt: "15px",
                 display: "flex",
                 flexDirection: "row",
-                alignItems:"center",
+                alignItems: "center",
               }}
             >
               <Box>
                 <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
               </Box>
-              <Box sx={{display:"flex",justifyContent:'space-between',width:"80%"}}>
-              <Box sx={{display:'flex',flexDirection:'column',alignItems:"center",ml:'15px'}}>
-                <Typography>abc.orb</Typography>
-                <Typography>2/4/22</Typography>
-              </Box>
-              <Box sx={{display:'flex',flexDirection:'column',alignItems:"center",}}>
-                <Typography>100 USDT</Typography>
-                <Typography>MATIC</Typography>
-              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "80%",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    ml: "15px",
+                  }}
+                >
+                  <Typography>abc.orb</Typography>
+                  <Typography>2/4/22</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography>100 USDT</Typography>
+                  <Typography>MATIC</Typography>
+                </Box>
               </Box>
             </Box>
-              <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",mt:'15px'}}>
-                <ButtonBase>View More</ButtonBase>
-              </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mt: "15px",
+              }}
+            >
+              <ButtonBase>View More</ButtonBase>
+            </Box>
           </Card.Body>
         </Card>
       </Box>

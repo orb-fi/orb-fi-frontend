@@ -12,6 +12,8 @@ import EnterName from "./Routes/EnterName";
 import Layout from "./Utils/Layout";
 import ConnectWallet from "./Routes/ConnectWallet";
 import LandingPage from "./Routes/LandingPage";
+import OrbWalletPage from "./Routes/OrbWalletPage";
+
 function App() {
   return (
     <Layout>
@@ -25,6 +27,7 @@ function App() {
           <Route element={<AuthWrapper />}>
             <Route path="/test" element={<TestPageProtected />} />
             <Route path="/homepage" element={<HomePage />} />
+            <Route path="/orbwallet" element={<OrbWalletPage />} />
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
