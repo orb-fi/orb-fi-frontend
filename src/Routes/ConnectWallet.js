@@ -5,11 +5,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Avatar from "@mui/material/avatar";
 import { Box, Button, Container, Typography } from "@mui/material";
 
-import {
-  disconnectWalet,
-  requestWallet,
-  setCurrentWallet,
-} from "./../store/authSlice";
+import { requestWallet, setCurrentWallet } from "./../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const ConnectWallet = () => {

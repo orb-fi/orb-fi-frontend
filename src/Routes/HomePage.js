@@ -17,8 +17,11 @@ import Loading from "@nextui-org/react/loading";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import Card from "@nextui-org/react/card";
+import { disconnectWalet } from "../store/authSlice.js";
+import { useDispatch } from "react-redux";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -29,8 +32,8 @@ const HomePage = () => {
     "DisconnectWalet",
   ];
   return (
-    <>
-      The current theme is: {type}
+    <Container>
+      Toggle Theme here
       <Switch
         checked={isDark}
         onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
@@ -165,6 +168,7 @@ const HomePage = () => {
                     key="DisconnectWalet"
                     withDivider
                     color="error"
+                    onClick={() => dispatch(disconnectWalet())}
                   >
                     Disconnect Walet
                   </Dropdown.Item>
@@ -206,7 +210,7 @@ const HomePage = () => {
                   <Typography>Roller Button</Typography>
                 </Box>
               </Box>
-              <Box >
+              <Box>
                 <Typography variant="dsmReg">1100 USDT</Typography>
               </Box>
               <Box sx={{ mt: "10px" }}>
@@ -245,20 +249,23 @@ const HomePage = () => {
         >
           <Card isPressable isHoverable css={{ mw: "400px" }}>
             <Card.Body>
-              <Box sx={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-              
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <Typography>0xsadjhsdjkh289u928uh</Typography>
                 <Button> copy</Button>
-              
-              <Box>
 
-              </Box>
+                <Box></Box>
               </Box>
             </Card.Body>
           </Card>
         </Box>
       </Container>
-    </>
+    </Container>
   );
 };
 

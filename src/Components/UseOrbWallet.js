@@ -24,7 +24,7 @@ const UseOrbWallet = () => {
             objectFit="cover"
             width="100%"
             height="100%"
-            alt="Relaxing app background"
+            alt="orb.fi uses"
           />
         </Card.Body>
         <Card.Footer
@@ -41,16 +41,16 @@ const UseOrbWallet = () => {
             <Col>
               <Row>
                 <Col>
-                  <Typography color="#d1d1d1" variant={"tmdReg"}>
+                  <Typography color="#d1d1d1" variant={"tsmReg"}>
                     Available Now
                   </Typography>
                 </Col>
               </Row>
-              <Typography color="#d1d1d1" variant={"tmdReg"}>
+              <Typography color="#d1d1d1" variant={"tsmReg"}>
                 Start Today
               </Typography>
             </Col>
-            <Col css={{display:"flex",alignitems: "center"}}>
+            <Col css={{ display: "flex", alignitems: "center" }}>
               <Row justify="flex-end">
                 <Button
                   flat
