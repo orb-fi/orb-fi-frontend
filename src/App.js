@@ -13,6 +13,8 @@ import Layout from "./Utils/Layout";
 import ConnectWallet from "./Routes/ConnectWallet";
 import LandingPage from "./Routes/LandingPage";
 import OrbWalletPage from "./Routes/OrbWalletPage";
+import InitiateOrbWalletTransfer from "./Routes/InitiateOrbWalletTransfer";
+import InitiateWalletTransfer from "./Routes/InitiateWalletTransfer";
 
 function App() {
   return (
@@ -28,8 +30,8 @@ function App() {
             <Route path="/test" element={<TestPageProtected />} />
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/orbwallet" element={<OrbWalletPage />} />
-            <Route path="/iniwallet" element={<OrbWalletPage />} />
-            <Route path="/iniorbwallet" element={<OrbWalletPage />} />
+            <Route path="/iniwallet" element={<InitiateWalletTransfer />} />
+            <Route path="/iniorbwallet" element={<InitiateOrbWalletTransfer />} />
             
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
