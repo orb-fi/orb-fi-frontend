@@ -1,9 +1,8 @@
-import { Box, Container, Typography } from "@mui/material";
-import { Spacer } from "@nextui-org/react";
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Loading } from "@nextui-org/react";
-const LandingPage = () => {
+import { Box, Button, Container, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+const ConnectWallet = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Container
@@ -19,8 +18,8 @@ const LandingPage = () => {
         sx={{ display: "flex", justifyContent: "center", alignitems: "center" }}
       >
         <svg
-          width="180"
-          height="180"
+          width="140"
+          height="140"
           viewBox="0 0 70 70"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -73,18 +72,27 @@ const LandingPage = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignitems: "center",
-          mt: "35px",
+          alignItems: "center",
+          mt: "20px",
         }}
       >
-        {isMobile ? (
-          <Loading type="gradient" size="lg" />
-        ) : (
-          <Loading type="gradient" size="xl" />
-        )}
+        <Button
+          variant="contained"
+          startIcon={<Avatar src="/assets/metamask-icon.png"   />}
+          sx={{
+            borderRadius: "14px",
+            width: "280px",
+            height: "60px",
+            backgroundColor: "#0072F5",
+          }}
+        >
+            
+             
+          Connect Wallet
+        </Button>
       </Box>
     </Container>
   );
 };
 
-export default LandingPage;
+export default ConnectWallet;
