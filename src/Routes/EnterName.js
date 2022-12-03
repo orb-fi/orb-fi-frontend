@@ -1,10 +1,11 @@
-import { Box, Container, Typography } from "@mui/material";
-import { Spacer } from "@nextui-org/react";
 import React from "react";
+import { Container, Box, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Loading} from "@nextui-org/react";
-const LandingPage = () => {
+import { Input, Grid } from "@nextui-org/react";
+import Button from "@mui/material/Button";
+const EnterName = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <Container
       sx={{
@@ -16,11 +17,15 @@ const LandingPage = () => {
       }}
     >
       <Box
-        sx={{ display: "flex", justifyContent: "center", alignitems: "center" }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-top",
+        }}
       >
         <svg
-          width="250"
-          height="250"
+          width="80"
+          height="80"
           viewBox="0 0 250 250"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -59,20 +64,76 @@ const LandingPage = () => {
         </svg>
       </Box>
       <Box
-        sx={{ display: "flex", justifyContent: "center", alignitems: "center",mt:'15px' }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "15px",
+        }}
       >
-        <Typography variant={isMobile ? "dxsBd" : "d2xlMed"}>ORB.FI</Typography>
+        <Typography variant={isMobile ? "dxsBd" : "d2xlMed"}>
+          Enter your nickname :") 
+        </Typography>
       </Box>
-      <Box  sx={{ display: "flex", justifyContent: "center", alignitems: "center",mt:"35px" }}>
-       
-        {isMobile ? (
-              <Loading type="gradient" size="lg"/>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "15px",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid>
+            {isMobile ? (
+             <Input 
+             width="280px"
+             height="60px"
+             placeholder="crons" 
+           />
             ) : (
-              <Loading  type="gradient" size="xl"/>
+              <Input
+                width="300px"
+                height="50px"
+                
+                placeholder="crons"
+              />
             )}
+          </Grid>
+        </Box>
+      </Box>
+
+      {/* button */}
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "30px",
+        }}
+      >
+        <Button
+          variant="contained"
+          sx={{
+            borderRadius: "20px",
+            width: "280px",
+            height: "50px",
+            backgroundColor: "#0072F5",
+          }}
+        >
+          Continue
+        </Button>
       </Box>
     </Container>
   );
 };
 
-export default LandingPage;
+export default EnterName;

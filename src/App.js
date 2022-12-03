@@ -7,6 +7,7 @@ import HomePage from "./Routes/HomePage";
 import TestPageProtected from "./Routes/TestPage";
 import NotFoundPage from "./Routes/NotFoundPage";
 import ClaimYourOrb from "./Routes/ClaimYourOrb";
+import EnterName from "./Routes/EnterName";
 import Layout from "./Utils/Layout";
 import LandingPage from "./Routes/LandingPage";
 import TopBar from "./Components/TopBar";
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/landingpage" element={<LandingPage />} />
           <Route path="/ClaimYourOrb" element={<ClaimYourOrb />} />
+          <Route path="/EnterName" element={<EnterName />} />
           <Route path="/" element={<HomePage />} />
           <Route element={<AuthWrapper />}>
             <Route path="/test" element={<TestPageProtected />} />
