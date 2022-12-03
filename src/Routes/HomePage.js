@@ -18,7 +18,6 @@ import {
   Typography,
   IconButton,
   Tooltip,
-  Stack,
   ButtonBase,
 } from "@mui/material";
 import Grid from "@nextui-org/react/grid";
@@ -32,6 +31,9 @@ import { disconnectWalet } from "../store/authSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import BoltIcon from "@mui/icons-material/Bolt";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import CallSplitIcon from '@mui/icons-material/CallSplit';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -42,10 +44,11 @@ const HomePage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [toolTipTitle, setToolTipTitle] = React.useState("Copy");
   const authState = useSelector((state) => state.auth);
+
   return (
     <Container
       sx={{
-        minHeight: "calc(100vh - 100px)",
+        minHeight: "calc(100vh)",
         display: "flex",
         flexDirection: "column",
       }}
@@ -276,8 +279,12 @@ const HomePage = () => {
           mt: "20px",
         }}
       >
-        <Card isPressable isHoverable css={{ mw: "400px" }}>
-          <Card.Body>
+        <Card
+          isPressable
+          isHoverable
+          css={{ mw: "400px", mh: "50px", bgColor: "#36383E" }}
+        >
+          <Card.Body css={{ padding: 0 }}>
             <Box
               sx={{
                 display: "flex",
@@ -285,7 +292,7 @@ const HomePage = () => {
                 alignItems: "center",
               }}
             >
-              <Typography variant="dxsMed">OrbID:</Typography>
+              <Typography variant="txlMed">OrbID:</Typography>
               <Typography variant="tmdMed">0xsadjhsdjkh289u928uh</Typography>
               <IconButton
                 onClick={() => {
@@ -344,7 +351,7 @@ const HomePage = () => {
               }}
               onClick={() => navigate("/orbwallet")}
             >
-              1
+              <BoltIcon fontSize="medium" />
             </Button>
             <Typography variant="tlgMed">Orb Transfer</Typography>
           </Box>
@@ -365,8 +372,9 @@ const HomePage = () => {
                 borderRadius: "30px",
                 bgcolor: "#0072F5",
               }}
+              onClick={() => navigate("/iniwallet")}
             >
-              2
+              <AccountBalanceWalletIcon />
             </Button>
             <Typography variant="tlgMed">Wallet-Wallet</Typography>
           </Box>
@@ -388,7 +396,7 @@ const HomePage = () => {
                 bgcolor: "#0072F5",
               }}
             >
-              3
+              <CallSplitIcon/>
             </Button>
             <Typography variant="tlgMed">Split</Typography>
           </Box>
