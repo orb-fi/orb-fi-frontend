@@ -11,7 +11,7 @@ const OrbWalletOverview = () => {
   const [crypto, setCrypto] = useState("USDT");
   return (
     <Container>
-      <Card isHoverable variant="bordered" css={{ mw: "500px" }}>
+      <Card  variant="bordered" css={{ mw: "500px" }}>
         <Container>
           <Card.Body>
             <Row>
