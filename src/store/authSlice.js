@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  wallets: ["metamask", "tronlink", "chaiwallet"],
+  wallets: ["metamask"],
   metamask: null,
-  tronlink: null,
-  chaiwallet: null,
   currentWallet: null,
 };
 
