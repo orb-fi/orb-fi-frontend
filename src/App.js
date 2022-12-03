@@ -13,21 +13,18 @@ import Layout from "./Utils/Layout";
 import ConnectWallet from "./Routes/ConnectWallet";
 import LandingPage from "./Routes/LandingPage";
 function App() {
-  const value = useSelector((state) => state.counter.value);
-
   return (
     <Layout>
-      
       <Router>
         <Routes>
-          <Route path="/landingpage" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/onboardone" element={<OnboardingScreenOne />} />
           <Route path="/connectwallet" element={<ConnectWallet />} />
           <Route path="/claimyourorb" element={<ClaimYourOrb />} />
           <Route path="/entername" element={<EnterName />} />
-          <Route path="/" element={<HomePage />} />
           <Route element={<AuthWrapper />}>
             <Route path="/test" element={<TestPageProtected />} />
+            <Route path="/homepage" element={<HomePage />} />
           </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>

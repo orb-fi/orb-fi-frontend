@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Avatar from "@mui/material/avatar";
@@ -10,10 +10,12 @@ import {
   requestWallet,
   setCurrentWallet,
 } from "./../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const ConnectWallet = () => {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width:600px)");
+  const navigate = useNavigate();
   const connectMetamask = () => {
     if (window.ethereum) {
       try {
@@ -35,6 +37,13 @@ const ConnectWallet = () => {
       alert("Install Wallet");
     }
   };
+  const authState = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (authState.currentWallet === "metamask") {
+      navigate("/homepage");
+    } else return null;
+  }, [authState]);
+
   return (
     <Container
       sx={{
