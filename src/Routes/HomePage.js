@@ -33,9 +33,10 @@ import { useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import BoltIcon from "@mui/icons-material/Bolt";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import CallSplitIcon from '@mui/icons-material/CallSplit';
+import CallSplitIcon from "@mui/icons-material/CallSplit";
 
 const HomePage = () => {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [amountUsed, setAmountUsed] = useState(400);
@@ -396,7 +397,7 @@ const HomePage = () => {
                 bgcolor: "#0072F5",
               }}
             >
-              <CallSplitIcon/>
+              <CallSplitIcon />
             </Button>
             <Typography variant="tlgMed">Split</Typography>
           </Box>
