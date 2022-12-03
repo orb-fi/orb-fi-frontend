@@ -1,25 +1,27 @@
 import React from "react";
 import { useTheme as useNextTheme } from "next-themes";
-import {
-  Navbar,
-  Link,
-  Text,
-  Avatar,
-  Dropdown,
-  Divider,
-} from "@nextui-org/react";
+import { Navbar, Link, Text, Dropdown, Divider } from "@nextui-org/react";
 import Layout from "../Utils/Layout.js";
+import { deepOrange, deepPurple } from "@mui/material/colors";
 import { Switch, useTheme } from "@nextui-org/react";
-import { Container, Box, Typography, IconButton, Tooltip } from "@mui/material";
+import {
+  Container,
+  Box,
+  Typography,
+  IconButton,
+  Tooltip,
+  Stack,
+  ButtonBase,
+} from "@mui/material";
 import Grid from "@nextui-org/react/grid";
 import Input from "@nextui-org/react/input";
 import Loading from "@nextui-org/react/loading";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import Card from "@nextui-org/react/card";
+import Avatar from "@mui/material/Avatar";
 import { disconnectWalet } from "../store/authSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -38,12 +40,13 @@ const HomePage = () => {
     console.log("Disconnect");
   };
   return (
-    <Container>
-      Toggle Theme here
-      <Switch
-        checked={isDark}
-        onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
-      />
+    <Container
+      sx={{
+        minHeight: "calc(100vh - 100px)",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Box>
         <Layout>
           <Navbar isBordered variant="sticky">
@@ -119,7 +122,7 @@ const HomePage = () => {
                     bordered
                     color="primary"
                     width="200px"
-                    Placeholder="Search..."
+                    Placeholder="crons.orb"
                     contentRight={<Loading size="xs" />}
                   />
                 ) : (
@@ -127,7 +130,7 @@ const HomePage = () => {
                     clearable
                     bordered
                     color="primary"
-                    Placeholder="Search..."
+                    Placeholder="crons.orb"
                     width="500px"
                     contentRight={<Loading size="xs" />}
                   />
@@ -181,113 +184,189 @@ const HomePage = () => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+              <Switch
+                checked={isDark}
+                onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+              />
             </Navbar.Content>
           </Navbar>
         </Layout>
       </Box>
-      <Container
+
+      {/* main card */}
+      <Box
         sx={{
-          minHeight: "calc(100vh - 100px)",
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "35px",
         }}
       >
-        {/* main card */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            mt: "35px",
-          }}
-        >
-          <Card css={{ mw: "500px" }}>
-            <Card.Body>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Box>
-                  <Typography variant="dsmSmbd">Total Balance</Typography>
-                </Box>
-                <Box>
-                  <Typography>Roller Button</Typography>
-                </Box>
+        <Card css={{ mw: "500px" }}>
+          <Card.Body>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <Typography variant="dsmSmbd">Total Balance</Typography>
               </Box>
               <Box>
-                <Typography variant="dsmReg">1100 USDT</Typography>
+                <Typography>Roller Button</Typography>
               </Box>
-              <Box sx={{ mt: "10px" }}>
-                <Divider />
-              </Box>
+            </Box>
+            <Box>
+              <Typography variant="dsmReg">1100 USDT</Typography>
+            </Box>
+            <Box sx={{ mt: "10px" }}>
+              <Divider />
+            </Box>
 
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  mt: "15px",
-                  alignItems: "center",
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mt: "15px",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <Typography variant="dxsMed" inlineSize="10px">
+                  0xjheqwkjhj2897ds987asd8
+                </Typography>
+              </Box>
+              <Box>
+                <Typography>modal</Typography>
+              </Box>
+            </Box>
+          </Card.Body>
+        </Card>
+      </Box>
+
+      {/* copy card */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "20px",
+        }}
+      >
+        <Card isPressable isHoverable css={{ mw: "400px" }}>
+          <Card.Body>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="dxsMed">OrbID:</Typography>
+              <Typography>0xsadjhsdjkh289u928uh</Typography>
+              <IconButton
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(authState[authState.currentWallet])
+                    .then(() => {
+                      setToolTipTitle("Copied");
+                      setTimeout(() => {
+                        setToolTipTitle("Copy");
+                      }, 500);
+                    });
                 }}
               >
-                <Box>
-                  <Typography variant="dxsMed" inlineSize="10px">
-                    0xjheqwkjhj2897ds987asd8
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography>modal</Typography>
-                </Box>
-              </Box>
-            </Card.Body>
-          </Card>
-        </Box>
+                <Tooltip title={toolTipTitle} placement="top" arrow>
+                  <Typography color="white">Copy</Typography>
+                </Tooltip>
+              </IconButton>
 
-        {/* copy card */}
+              <Box></Box>
+            </Box>
+          </Card.Body>
+        </Card>
+      </Box>
+      {/* Buttons */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "25px",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            mt: "20px",
+            justifyContent: "space-around",
+            minWidth: "50%",
           }}
         >
-          <Card isPressable isHoverable css={{ mw: "400px" }}>
-            <Card.Body>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="dxsMed">OrbID:</Typography>
-                <Typography>0xsadjhsdjkh289u928uh</Typography>
-                <IconButton
-                  onClick={() => {
-                    navigator.clipboard
-                      .writeText(authState[authState.currentWallet])
-                      .then(() => {
-                        setToolTipTitle("Copied");
-                        setTimeout(() => {
-                          setToolTipTitle("Copy");
-                        }, 500);
-                      });
-                  }}
-                >
-                  <Tooltip title={toolTipTitle} placement="top" arrow>
-                    <Typography color="white">Copy</Typography>
-                  </Tooltip>
-                </IconButton>
-
-                <Box></Box>
-              </Box>
-            </Card.Body>
-          </Card>
+          <Button
+            variant="contained"
+            sx={{ width: "60px", height: "60px", borderRadius: "30px" }}
+          >
+            1
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ width: "60px", height: "60px", borderRadius: "30px" }}
+          >
+            2
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ width: "60px", height: "60px", borderRadius: "30px" }}
+          >
+            3
+          </Button>
         </Box>
-      </Container>
+      </Box>
+
+      {/* card pools */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "20px",
+        }}
+      >
+        <Card css={{ mw: "500px" }}>
+          <Card.Body>
+            <Box>
+              <Typography>Recent Transaction</Typography>
+            </Box>
+            <Box
+              sx={{
+                mt: "15px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems:"center",
+              }}
+            >
+              <Box>
+                <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+              </Box>
+              <Box sx={{display:"flex",justifyContent:'space-between',width:"80%"}}>
+              <Box sx={{display:'flex',flexDirection:'column',alignItems:"center",ml:'15px'}}>
+                <Typography>abc.orb</Typography>
+                <Typography>2/4/22</Typography>
+              </Box>
+              <Box sx={{display:'flex',flexDirection:'column',alignItems:"center",}}>
+                <Typography>100 USDT</Typography>
+                <Typography>MATIC</Typography>
+              </Box>
+              </Box>
+            </Box>
+              <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",mt:'15px'}}>
+                <ButtonBase>View More</ButtonBase>
+              </Box>
+          </Card.Body>
+        </Card>
+      </Box>
     </Container>
   );
 };
