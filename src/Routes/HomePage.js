@@ -1,7 +1,7 @@
 import React from "react";
 import { useTheme as useNextTheme } from "next-themes";
 import { Switch, useTheme } from "@nextui-org/react";
-
+import TopBar from "../Components/TopBar";
 const HomePage = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();

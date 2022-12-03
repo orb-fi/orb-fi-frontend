@@ -1,9 +1,40 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Avatar from "@mui/material/avatar";
 import { Box, Button, Container, Typography } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
+
+import {
+  disconnectWalet,
+  requestWallet,
+  setCurrentWallet,
+} from "./../store/authSlice";
+
 const ConnectWallet = () => {
+  const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width:600px)");
+  const connectMetamask = () => {
+    if (window.ethereum) {
+      try {
+        window.ethereum
+          .request({ method: "eth_requestAccounts" })
+          .then((result) => {
+            dispatch(
+              requestWallet({
+                wallet: "metamask",
+                address: result[0],
+              })
+            );
+            dispatch(setCurrentWallet({ wallet: "metamask" }));
+          });
+      } catch (error) {
+        alert("Unlock your wallet, Try Again!");
+      }
+    } else {
+      alert("Install Wallet");
+    }
+  };
   return (
     <Container
       sx={{
@@ -78,17 +109,22 @@ const ConnectWallet = () => {
       >
         <Button
           variant="contained"
-          startIcon={<Avatar src="/assets/metamask-icon.png"   />}
+          startIcon={
+            <Avatar
+              alt="Meta Mask"
+              variant="square"
+              src="/Assets/metamask-icon.png"
+            ></Avatar>
+          }
           sx={{
             borderRadius: "14px",
             width: "280px",
             height: "60px",
             backgroundColor: "#0072F5",
           }}
+          onClick={() => connectMetamask()}
         >
-            
-             
-          Connect Wallet
+          <Typography variant="txlSmbd">Connect Wallet</Typography>
         </Button>
       </Box>
     </Container>

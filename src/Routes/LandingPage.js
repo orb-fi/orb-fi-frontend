@@ -1,9 +1,17 @@
 import { Box, Container, Typography } from "@mui/material";
-import { Spacer } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Loading } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/connectwallet");
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <Container
