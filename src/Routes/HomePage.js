@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import Layout from "../Utils/Layout.js";
 import { Switch, useTheme } from "@nextui-org/react";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box, Typography, IconButton, Tooltip } from "@mui/material";
 import Grid from "@nextui-org/react/grid";
 import Input from "@nextui-org/react/input";
 import Loading from "@nextui-org/react/loading";
@@ -18,7 +18,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import Card from "@nextui-org/react/card";
 import { disconnectWalet } from "../store/authSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,11 @@ const HomePage = () => {
     "My Settings",
     "DisconnectWalet",
   ];
+  const [toolTipTitle, setToolTipTitle] = React.useState("Copy");
+  const authState = useSelector((state) => state.auth);
+  const handleDisconnectWalet = () => {
+    console.log("Disconnect");
+  };
   return (
     <Container>
       Toggle Theme here
@@ -168,9 +174,10 @@ const HomePage = () => {
                     key="DisconnectWalet"
                     withDivider
                     color="error"
-                    onClick={() => dispatch(disconnectWalet())}
                   >
-                    Disconnect Walet
+                    <Box onClick={() => dispatch(disconnectWalet())}>
+                      Disconnect Walet
+                    </Box>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -252,12 +259,28 @@ const HomePage = () => {
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "space-around",
                   alignItems: "center",
                 }}
               >
+                <Typography variant="dxsMed">OrbID:</Typography>
                 <Typography>0xsadjhsdjkh289u928uh</Typography>
-                <Button> copy</Button>
+                <IconButton
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(authState[authState.currentWallet])
+                      .then(() => {
+                        setToolTipTitle("Copied");
+                        setTimeout(() => {
+                          setToolTipTitle("Copy");
+                        }, 500);
+                      });
+                  }}
+                >
+                  <Tooltip title={toolTipTitle} placement="top" arrow>
+                    <Typography color="white">Copy</Typography>
+                  </Tooltip>
+                </IconButton>
 
                 <Box></Box>
               </Box>
