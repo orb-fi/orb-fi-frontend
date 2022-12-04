@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
+import { useEffect, useState } from "react";
+import { getDocumentTheme } from "@nextui-org/react";
 
 import {
   createTheme as createThemeNextUI,
   NextUIProvider,
 } from "@nextui-org/react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { createTheme, ThemeProvider } from "@mui/material";
 // 2. Call `createTheme` and pass your custom values
 const lightTheme = createThemeNextUI({
@@ -26,7 +27,29 @@ const darkTheme = createThemeNextUI({
     fonts: {},
   },
 });
+
 const Layout = ({ children }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // you can use any storage
+    let theme = window.localStorage.getItem("data-theme");
+    setIsDark(theme === "dark");
+
+    const observer = new MutationObserver((mutation) => {
+      let newTheme = getDocumentTheme(document?.documentElement);
+      setIsDark(newTheme === "dark");
+    });
+
+    // Observe the document theme changes
+    observer.observe(document?.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme", "style"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const theme = useMemo(() =>
     createTheme({
       type: "dark",
@@ -345,16 +368,9 @@ const Layout = ({ children }) => {
   );
   return (
     <ThemeProvider theme={theme}>
-      <NextThemesProvider
-        defaultTheme="system"
-        attribute="class"
-        value={{
-          light: lightTheme.className,
-          dark: darkTheme.className,
-        }}
-      >
-        <NextUIProvider theme={theme}>{children}</NextUIProvider>
-      </NextThemesProvider>
+      <NextUIProvider theme={darkTheme}>
+        {children}
+      </NextUIProvider>
     </ThemeProvider>
   );
 };
