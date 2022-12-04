@@ -25,7 +25,7 @@ const InitiateOrbWalletTransfer = () => {
         minHeight: "calc(100vh - 100px)",
         display: "flex",
         flexDirection: "column",
-        alignItems:"center"
+        alignItems: "center",
       }}
     >
       <Box>
@@ -173,26 +173,54 @@ const InitiateOrbWalletTransfer = () => {
           </Navbar>
         </Layout>
       </Box>
-      <Box sx={{display:'flex',justifyContent:"center",mt:'25px'}}>
-        <OrbWalletOverview/>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: "25px" }}>
+        <OrbWalletOverview />
       </Box>
 
       {/* payment card */}
-      <Box sx={{mt:"20px"}}>
+      <Box sx={{ mt: "20px" }}>
+        <Card css={{ w: "500px" }}>
+          <Card.Body>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <Typography variant="dsmMed" sx={{ m: "10px" }}>
+                Orb Pay !
+              </Typography>
 
-      <Card css={{ w: "500px" }}>
-      <Card.Body>
-       <Box sx={{display:"flex",justifyContent:'center',alignItems:'center',flexDirection:"column"}}>
-      <Typography variant="dsmMed" sx={{m:'10px'}}>Orb Pay !</Typography>
-      
-       <Input css={{w:"400px",mh:"80px"}} 
-          bordered 
-          Placeholder="enter orb@/wallet id" 
-          color="default" />
-          <Button variant="contained" sx={{mt:"10px",borderRadius:"22px",width:"400px",height:"50px"}}>Confirm</Button>
-       </Box>
-      </Card.Body>
-    </Card>
+              <Input
+                css={{ w: "400px", mh: "80px" }}
+                bordered
+                Placeholder="enter orb@/wallet id"
+                color="default"
+              />
+              <Box sx={{mt:'15px'}}>
+                <Input
+                  css={{ w: "400px", mh: "80px" }}
+                  bordered
+                  Placeholder="Enter Value"
+                  color="default"
+                />
+              </Box>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: "10px",
+                  borderRadius: "22px",
+                  width: "400px",
+                  height: "50px",
+                }}
+              >
+                Confirm
+              </Button>
+            </Box>
+          </Card.Body>
+        </Card>
       </Box>
     </Container>
   );
