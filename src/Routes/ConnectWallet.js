@@ -39,8 +39,9 @@ const ConnectWallet = () => {
     if (authState.currentWallet === "metamask") {
       if (newUser === true) {
         navigate("/claimyourorb");
+      } else {
+        navigate("/homepage");
       }
-      navigate("/homepage");
     }
   }, [authState]);
 

@@ -45,7 +45,6 @@ const HomePage = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [toolTipTitle, setToolTipTitle] = React.useState("Copy");
   const authState = useSelector((state) => state.auth);
-
   return (
     <Container
       sx={{
@@ -258,12 +257,14 @@ const HomePage = () => {
                 }}
               >
                 <Box sx={{ width: "50px" }}>
-                  <Typography variant="txlMed" inlineSize="10px" noWrap={true}>
-                    0xjheqwkjhj2897ds987asd8
+                  <Typography
+                    noWrap
+                    variant="txlMed"
+                    sx={{ width: "50px" }}
+                    inlineSize="10px"
+                  >
+                    {`...${authState["metamask"].slice(17)}`}
                   </Typography>
-                </Box>
-                <Box>
-                  <Typography>modal</Typography>
                 </Box>
               </Box>
             </Container>
@@ -294,7 +295,7 @@ const HomePage = () => {
               }}
             >
               <Typography variant="txlMed">OrbID:</Typography>
-              <Typography variant="tmdMed">0xsadjhsdjkh289u928uh</Typography>
+              <Typography variant="tmdMed">neo@orb</Typography>
               <IconButton
                 onClick={() => {
                   navigator.clipboard

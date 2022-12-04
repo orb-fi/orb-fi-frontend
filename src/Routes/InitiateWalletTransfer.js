@@ -145,7 +145,7 @@ const InitiateWalletTransfer = () => {
           </Box>
           <Divider sx={{ mt: "15px" }} />
           <Box sx={{ mt: "15px" }}>
-            <Typography variant="">From.</Typography>
+            <Typography variant="dmdSmbd">From.</Typography>
             <Box
               sx={{ width: "100%", display: "flex", flexDirection: "column" }}
             >
