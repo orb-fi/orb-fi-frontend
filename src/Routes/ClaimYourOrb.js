@@ -1,12 +1,30 @@
 import React, { useState } from "react";
+import confetti from "canvas-confetti";
 import { Container, Box, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Input, Grid } from "@nextui-org/react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 const ClaimYourOrb = () => {
+  const navigate = useNavigate();
   const [orbId, setOrbId] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
+  const handleConfetti = () => {
+    confetti({
+      particleCount: 100,
+      startVelocity: 30,
+      spread: 360,
+      origin: {
+        x: 0.5,
+        // since they fall down, start a bit higher than random
+        y: 0.5,
+      },
+    });
+    setTimeout(() => {
+      navigate("/entername");
+    }, 2000);
+  };
   return (
     <Container
       sx={{
@@ -99,6 +117,7 @@ const ClaimYourOrb = () => {
                 labelRight=".orb"
                 onChange={(e) => {
                   setOrbId(`${e.target.value}.orb`);
+                  setIsAvailable(true);
                 }}
                 placeholder="crons"
               />
@@ -110,6 +129,7 @@ const ClaimYourOrb = () => {
                 placeholder="crons"
                 onChange={(e) => {
                   setOrbId(`${e.target.value}.orb`);
+                  setIsAvailable(true);
                 }}
               />
             )}
@@ -141,6 +161,7 @@ const ClaimYourOrb = () => {
             backgroundColor: "#0072F5",
           }}
           disabled={orbId === "" || !isAvailable ? true : false}
+          onClick={isAvailable ? handleConfetti : null}
         >
           Continue
         </Button>

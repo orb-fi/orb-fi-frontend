@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Box, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Input, Grid } from "@nextui-org/react";
+import { Input, Grid, Modal, Text, Spacer } from "@nextui-org/react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 const EnterName = () => {
+  const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width:600px)");
+  const [inputValue, setInputValue] = useState("");
+  const [visible, setVisible] = React.useState(false);
+  const handler = () => setVisible(true);
 
+  const closeHandler = () => {
+    setVisible(false);
+    console.log("closed");
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
   return (
     <Container
       sx={{
@@ -72,7 +85,7 @@ const EnterName = () => {
         }}
       >
         <Typography variant={isMobile ? "dxsBd" : "d2xlMed"}>
-          Enter your nickname :") 
+          {`Enter your nickname :") `}
         </Typography>
       </Box>
       <Box
@@ -93,17 +106,20 @@ const EnterName = () => {
         >
           <Grid>
             {isMobile ? (
-             <Input 
-             width="280px"
-             height="60px"
-             placeholder="crons" 
-           />
+              <Input
+                value={inputValue}
+                width="280px"
+                height="60px"
+                placeholder="crons"
+                onChange={handleInputChange}
+              />
             ) : (
               <Input
+                value={inputValue}
                 width="300px"
                 height="50px"
-                
                 placeholder="crons"
+                onChange={handleInputChange}
               />
             )}
           </Grid>
@@ -128,9 +144,43 @@ const EnterName = () => {
             height: "50px",
             backgroundColor: "#0072F5",
           }}
+          onClick={handler}
         >
           Continue
         </Button>
+        <Modal
+          closeButton
+          blur
+          aria-labelledby="modal-title"
+          open={visible}
+          onClose={closeHandler}
+        >
+          <Modal.Header>
+            <Text id="modal-title" size={25}>
+              {`Hey ${inputValue} :")`}
+              <Spacer />
+              <Text b size={20}>
+                You are all set to get your USDT stables rolling
+              </Text>
+            </Text>
+          </Modal.Header>
+          <Modal.Body></Modal.Body>
+          <Modal.Footer>
+            <Button
+              auto
+              colour="primary"
+              varinat="contained"
+              onClick={closeHandler}
+            >
+              <Typography
+                variant="tsmSmbd"
+                onClick={() => navigate("/homepage")}
+              >
+                lfg!
+              </Typography>
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Box>
     </Container>
   );
