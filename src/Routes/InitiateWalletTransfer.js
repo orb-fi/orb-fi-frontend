@@ -19,6 +19,7 @@ import { useFetchValueQuery } from "../store";
 import { useSelector } from "react-redux";
 import Card from "@nextui-org/react/cjs/card";
 import TokenModal from "../Components/TokenModal";
+import { Spacer } from "@nextui-org/react";
 
 const cryptoMap = {
   USDT: "tether",
@@ -144,6 +145,7 @@ const InitiateWalletTransfer = () => {
           </Box>
           <Divider sx={{ mt: "15px" }} />
           <Box sx={{ mt: "15px" }}>
+            <Typography variant="">From.</Typography>
             <Box
               sx={{ width: "100%", display: "flex", flexDirection: "column" }}
             >
@@ -281,7 +283,7 @@ const InitiateWalletTransfer = () => {
               <Typography variant="txsReg" sx={{ color: "#EDF7FF" }}>
                 {isFetching ? (
                   <Box sx={{ mx: "10px", width: "60px", height: "30px" }}>
-                    <Box className="loaderInrcValue"></Box>
+                    <Box className="loaderInrcValue">Loading</Box>
                   </Box>
                 ) : (tokenValue <= 0) | (tokenValue == null) ? (
                   `Enter ${token || "Crypto"} Value`
@@ -302,11 +304,12 @@ const InitiateWalletTransfer = () => {
             </Box>
           </Box>
           <Box>
-            <Typography variant="tmdMed">To OrbID or Address</Typography>
+            <Typography variant="dsmSmbd">To. </Typography>
+            <Typography variant="tmdMed"> OrbID or Address</Typography>
             <Box
               sx={{
                 justifyContent: "space-between",
-                mt: "10px",
+                my: "10px",
                 display: "flex",
                 alignItems: "center",
                 p: "10px 10px",
@@ -326,6 +329,89 @@ const InitiateWalletTransfer = () => {
                 sx={{ color: "#fff" }}
               />
             </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography sx={{ mb: "5px" }} variant="tmdMed">
+              Select Payee Preferred Network:
+            </Typography>
+            <Tooltip title="You can change network here" arrow placement="top">
+              <ButtonBase
+                onClick={handleOpenNetworkModal}
+                sx={{
+                  borderRadius: "22px",
+                  padding: "7px 10px",
+                  bgcolor: "#0072F5",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    width: "100%",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={`/chain/${network.toLowerCase()}.png`}
+                    width={24}
+                    height={24}
+                    alt={network.toUpperCase()}
+                  />
+                  <Typography variant="tsmReg" mx={1}>
+                    {network}
+                  </Typography>
+                </Box>
+              </ButtonBase>
+            </Tooltip>
+            <TokenModal
+              openTokenModal={openTokenModal}
+              handleCloseTokenModal={handleCloseTokenModal}
+              setToken={setToken}
+              network={network}
+              variant={"multiStable"}
+            />
+            <NetworkModal
+              openNetworkModal={openNetworkModal}
+              handleCloseNetworkModal={handleCloseNetworkModal}
+              setNetwork={setNetwork}
+            />
+          </Box>
+          {/* deposit */}
+          <Box
+            sx={{
+              mt: "10px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Typography variant="tmdMed">Deposit Amount:</Typography>
+            <ButtonBase
+              onClick={handleOpenTokenModal}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                borderRadius: "10px",
+                padding: "6px 10px",
+              }}
+            >
+              <img
+                src={`/cryptocurrency/${token.toLowerCase()}.png`}
+                alt={token.toUpperCase()}
+                width={20}
+              />
+              <Typography variant="tmdSmbd" mx={"5px"}>
+                {token}
+              </Typography>
+              <ExpandMoreIcon />
+            </ButtonBase>
           </Box>
           <Button
             variant={tokenValue | (tokenValue === 0) ? "contained" : "outlined"}

@@ -67,7 +67,7 @@ const NetworkModal = ({
       aria-labelledby="Crypto tokens network list"
       sx={{ borderRadius: "20px" }}
     >
-      <Box sx={{ width: { md: "400px" } }}>
+      <Box sx={{ width: { md: "400px" }, backgroundColor: "#8F8F8F" }}>
         <DialogTitle
           id="Crypto tokens network list"
           sx={{
