@@ -10,6 +10,7 @@ import {
   Tooltip,
   Button,
   IconButton,
+  Container,
 } from "@mui/material";
 import { InputBase } from "@mui/material";
 import Chip from "@mui/material/Chip";
@@ -36,7 +37,7 @@ const InitiateWalletTransfer = () => {
   const [openNetworkModal, setOpenNetworkModal] = useState(false);
   const [toggleMax, setToggleMax] = useState(false);
 
-  const _currentWallet = useSelector((state) => state.auth.currentWallet);
+  const _currentWallet = useSelector((state) => state.auth);
   const value = {
     from: cryptoMap[token],
     to: "usd",
@@ -102,217 +103,244 @@ const InitiateWalletTransfer = () => {
   };
 
   return (
-    <Card css={{ bgcolor: "#240C3C" }}>
-      <Box sx={{ maxWidth: 500, p: 6 }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <IconButton
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <ArrowBackIosIcon />
-          </IconButton>
-          <Typography variant="dssSmbd">Initiate transfer</Typography>
-          <ButtonBase
-            sx={{
-              borderRadius: "10px",
-              padding: "8px 12px",
-            }}
-            onClick={() => {
-              setTokenValue(null);
-            }}
-          >
-            {<Typography sx={{ color: "#2382F7" }}>clear all</Typography>}
-          </ButtonBase>
-        </Box>
-        <Divider sx={{ mt: "15px" }} />
-        <Box sx={{ mt: "15px" }}>
+    <Container
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card css={{ bgcolor: "#240C3C", width: "500px" }}>
+        <Box sx={{ maxWidth: 500, p: 6 }}>
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography sx={{ mb: "5px" }} variant="tmdMed">
-              Select Network:
-            </Typography>
-            <Tooltip title="You can change network here" arrow placement="top">
-              <ButtonBase
-                onClick={handleOpenNetworkModal}
-                sx={{
-                  borderRadius: "22px",
-                  padding: "7px 10px",
-                  bgcolor: "#0072F5",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    width: "100%",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={`/chain/${network.toLowerCase()}.png`}
-                    width={24}
-                    height={24}
-                    alt={network.toUpperCase()}
-                  />
-                  <Typography variant="tsmReg" mx={1}>
-                    {network}
-                  </Typography>
-                </Box>
-              </ButtonBase>
-            </Tooltip>
-            <TokenModal
-              openTokenModal={openTokenModal}
-              handleCloseTokenModal={handleCloseTokenModal}
-              setToken={setToken}
-              network={network}
-              variant={"multiStable"}
-            />
-            <NetworkModal
-              openNetworkModal={openNetworkModal}
-              handleCloseNetworkModal={handleCloseNetworkModal}
-              setNetwork={setNetwork}
-            />
-          </Box>
-          {/* deposit */}
-          <Box
-            sx={{
-              mt: "10px",
-              display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              width: "100%",
             }}
           >
-            <Typography variant="tmdMed">Deposit Amount:</Typography>
-            <ButtonBase
-              onClick={handleOpenTokenModal}
+            <IconButton
               sx={{
                 display: "flex",
-                justifyContent: "flex-start",
-                borderRadius: "10px",
-                padding: "6px 10px",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <img
-                src={`/cryptocurrency/${token.toLowerCase()}.png`}
-                alt={token.toUpperCase()}
-                width={20}
-              />
-              <Typography variant="tmdSmbd" mx={"5px"}>
-                {token}
-              </Typography>
-              <ExpandMoreIcon />
+              <ArrowBackIosIcon />
+            </IconButton>
+            <Typography variant="dssSmbd">Initiate transfer</Typography>
+            <ButtonBase
+              sx={{
+                borderRadius: "10px",
+                padding: "8px 12px",
+              }}
+              onClick={() => {
+                setTokenValue(null);
+              }}
+            >
+              {<Typography sx={{ color: "#2382F7" }}>clear all</Typography>}
             </ButtonBase>
           </Box>
-          <Box
-            sx={{
-              justifyContent: "space-between",
-              mt: "10px",
-              display: "flex",
-              alignItems: "center",
-              p: "10px 10px",
-              borderRadius: "10px",
-              border: (theme) =>
-                theme.palette.mode === "light"
-                  ? `1px solid #CBCBCB`
-                  : "1px solid #545B71",
-            }}
-          >
-            <InputBase
-              placeholder="Enter value"
-              // value={parseFloat(tokenValue) > 0.0 ? parseFloat(tokenValue) : ""}
-              //for testing
-              value={parseFloat(tokenValue)}
-              onChange={handleSetTokenValue}
-              type="number"
-              sx={{ color: "#fff" }}
-            />
-            <Chip
-              label="MAX"
-              color="primary"
-              variant={toggleMax ? "contained" : "outlined"}
-              onClick={handleClick}
-            />
-          </Box>
-          <Box
-            sx={{ display: "flex", justifyContent: "space-between", mt: "5px" }}
-          >
-            <Typography variant="txsReg" sx={{ color: "#EDF7FF" }}>
-              {isFetching ? (
-                <Box sx={{ mx: "10px", width: "60px", height: "30px" }}>
+          <Divider sx={{ mt: "15px" }} />
+          <Box sx={{ mt: "15px" }}>
+            <Box
+              sx={{ width: "100%", display: "flex", flexDirection: "column" }}
+            >
+              <Typography variant="tsmSmbd" sx={{ mb: 2 }} noWrap>
+                {`victs.orb`}
+              </Typography>
+              <Typography variant="tsmSmbd" sx={{ mb: 2 }} noWrap={false}>
+                {_currentWallet.metamask}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography sx={{ mb: "5px" }} variant="tmdMed">
+                Select Network:
+              </Typography>
+              <Tooltip
+                title="You can change network here"
+                arrow
+                placement="top"
+              >
+                <ButtonBase
+                  onClick={handleOpenNetworkModal}
+                  sx={{
+                    borderRadius: "22px",
+                    padding: "7px 10px",
+                    bgcolor: "#0072F5",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      width: "100%",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src={`/chain/${network.toLowerCase()}.png`}
+                      width={24}
+                      height={24}
+                      alt={network.toUpperCase()}
+                    />
+                    <Typography variant="tsmReg" mx={1}>
+                      {network}
+                    </Typography>
+                  </Box>
+                </ButtonBase>
+              </Tooltip>
+              <TokenModal
+                openTokenModal={openTokenModal}
+                handleCloseTokenModal={handleCloseTokenModal}
+                setToken={setToken}
+                network={network}
+                variant={"multiStable"}
+              />
+              <NetworkModal
+                openNetworkModal={openNetworkModal}
+                handleCloseNetworkModal={handleCloseNetworkModal}
+                setNetwork={setNetwork}
+              />
+            </Box>
+            {/* deposit */}
+            <Box
+              sx={{
+                mt: "10px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Typography variant="tmdMed">Deposit Amount:</Typography>
+              <ButtonBase
+                onClick={handleOpenTokenModal}
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  borderRadius: "10px",
+                  padding: "6px 10px",
+                }}
+              >
+                <img
+                  src={`/cryptocurrency/${token.toLowerCase()}.png`}
+                  alt={token.toUpperCase()}
+                  width={20}
+                />
+                <Typography variant="tmdSmbd" mx={"5px"}>
+                  {token}
+                </Typography>
+                <ExpandMoreIcon />
+              </ButtonBase>
+            </Box>
+            <Box
+              sx={{
+                justifyContent: "space-between",
+                mt: "10px",
+                display: "flex",
+                alignItems: "center",
+                p: "10px 10px",
+                borderRadius: "10px",
+                border: (theme) =>
+                  theme.palette.mode === "light"
+                    ? `1px solid #CBCBCB`
+                    : "1px solid #545B71",
+              }}
+            >
+              <InputBase
+                placeholder="Enter value"
+                // value={parseFloat(tokenValue) > 0.0 ? parseFloat(tokenValue) : ""}
+                //for testing
+                value={parseFloat(tokenValue)}
+                onChange={handleSetTokenValue}
+                type="number"
+                sx={{ color: "#fff" }}
+              />
+              <Chip
+                label="MAX"
+                color="primary"
+                variant={toggleMax ? "contained" : "outlined"}
+                onClick={handleClick}
+              />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mt: "5px",
+              }}
+            >
+              <Typography variant="txsReg" sx={{ color: "#EDF7FF" }}>
+                {isFetching ? (
+                  <Box sx={{ mx: "10px", width: "60px", height: "30px" }}>
+                    <Box className="loaderInrcValue"></Box>
+                  </Box>
+                ) : (tokenValue <= 0) | (tokenValue == null) ? (
+                  `Enter ${token || "Crypto"} Value`
+                ) : (
+                  `$${(tokenValue * data[cryptoMap[token]]["usd"]).toFixed(3)}`
+                )}
+              </Typography>
+
+              {isBalanceLoading ? (
+                <Box sx={{ mx: "10px", width: "60px", height: "10px" }}>
                   <Box className="loaderInrcValue"></Box>
                 </Box>
-              ) : (tokenValue <= 0) | (tokenValue == null) ? (
-                `Enter ${token || "Crypto"} Value`
               ) : (
-                `$${(tokenValue * data[cryptoMap[token]]["usd"]).toFixed(3)}`
+                <Typography variant="txsReg" sx={{ color: "#EDF7FF" }}>
+                  {`Balance: ${balance - tokenValue} ${token}`}
+                </Typography>
               )}
-            </Typography>
-
-            {isBalanceLoading ? (
-              <Box sx={{ mx: "10px", width: "60px", height: "10px" }}>
-                <Box className="loaderInrcValue"></Box>
-              </Box>
-            ) : (
-              <Typography variant="txsReg" sx={{ color: "#EDF7FF" }}>
-                {`Balance: ${balance - tokenValue} ${token}`}
-              </Typography>
-            )}
+            </Box>
           </Box>
-        </Box>
-        <Box>
-          <Typography variant="tmdMed">To OrbID or Address</Typography>
-          <Box
-            sx={{
-              justifyContent: "space-between",
-              mt: "10px",
-              display: "flex",
-              alignItems: "center",
-              p: "10px 10px",
-              borderRadius: "10px",
-              border: (theme) =>
-                theme.palette.mode === "light"
-                  ? `1px solid #CBCBCB`
-                  : "1px solid #545B71",
-            }}
+          <Box>
+            <Typography variant="tmdMed">To OrbID or Address</Typography>
+            <Box
+              sx={{
+                justifyContent: "space-between",
+                mt: "10px",
+                display: "flex",
+                alignItems: "center",
+                p: "10px 10px",
+                borderRadius: "10px",
+                border: (theme) =>
+                  theme.palette.mode === "light"
+                    ? `1px solid #CBCBCB`
+                    : "1px solid #545B71",
+              }}
+            >
+              <InputBase
+                placeholder="Enter value"
+                // value={parseFloat(tokenValue) > 0.0 ? parseFloat(tokenValue) : ""}
+                //for testing
+                value={payeeAddress || payeeOrbID}
+                onChange={handlePayee}
+                sx={{ color: "#fff" }}
+              />
+            </Box>
+          </Box>
+          <Button
+            variant={tokenValue | (tokenValue === 0) ? "contained" : "outlined"}
+            size="large"
+            sx={{ py: "10px", width: "100%", mt: "20px" }}
+            disableElevation
+            // disabled={(tokenValue <= 0) | (tokenValue == null) ? true : false}
+            //for testing
+            disabled={false}
           >
-            <InputBase
-              placeholder="Enter value"
-              // value={parseFloat(tokenValue) > 0.0 ? parseFloat(tokenValue) : ""}
-              //for testing
-              value={payeeAddress || payeeOrbID}
-              onChange={handlePayee}
-              sx={{ color: "#fff" }}
-            />
-          </Box>
+            Preview
+          </Button>
         </Box>
-        <Button
-          variant={tokenValue | (tokenValue === 0) ? "contained" : "outlined"}
-          size="large"
-          sx={{ py: "10px", width: "100%", mt: "20px" }}
-          disableElevation
-          // disabled={(tokenValue <= 0) | (tokenValue == null) ? true : false}
-          //for testing
-          disabled={false}
-        >
-          Preview
-        </Button>
-      </Box>
-    </Card>
+      </Card>
+    </Container>
   );
 };
 

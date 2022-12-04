@@ -183,7 +183,7 @@ const InitiateOrbWalletTransfer = () => {
       <Card css={{ w: "500px" }}>
       <Card.Body>
        <Box sx={{display:"flex",justifyContent:'center',alignItems:'center',flexDirection:"column"}}>
-      <Typography variant="dxsMed" sx={{m:'10px'}}>Orb Pay !</Typography>
+      <Typography variant="dsmMed" sx={{m:'10px'}}>Orb Pay !</Typography>
       
        <Input css={{w:"400px",mh:"80px"}} 
           bordered 

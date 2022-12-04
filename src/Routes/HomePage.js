@@ -350,7 +350,7 @@ const HomePage = () => {
                 borderRadius: "30px",
                 bgcolor: "#0072F5",
               }}
-              onClick={() => navigate("/orbwallet")}
+              onClick={() => navigate("/iniorbwallet")}
             >
               <BoltIcon fontSize="medium" />
             </Button>

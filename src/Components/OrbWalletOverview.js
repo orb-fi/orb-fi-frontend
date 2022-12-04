@@ -6,12 +6,13 @@ import { green, pink } from "@mui/material/colors";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import NetworkGroup from "./NetworkGroup";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 const OrbWalletOverview = () => {
   const [crypto, setCrypto] = useState("USDT");
   return (
     <Container>
-      <Card  variant="bordered" css={{ mw: "500px" }}>
+      <Card variant="bordered" css={{ mw: "500px" }}>
         <Container>
           <Card.Body>
             <Row>
@@ -107,9 +108,9 @@ const OrbWalletOverview = () => {
                         cursor: "pointer",
                       }}
                     >
-                      <AddCardIcon />
+                      <PeopleAltIcon />
                     </Avatar>
-                    <Typography variant="tlgMed">Add funds</Typography>
+                    <Typography variant="tlgMed">Friends</Typography>
                   </Box>
                 </Stack>
               </Box>
